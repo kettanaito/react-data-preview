@@ -1,9 +1,13 @@
 import React from 'react';
-import { Node } from './components';
+import { List, Node } from './components';
 
 export default function renderData(data) {
   if (Array.isArray(data)) {
     return renderArray(data);
+  }
+
+  if (typeof data === 'function') {
+    return renderFunction(data);
   }
 
   if (data instanceof Object) {
@@ -13,12 +17,29 @@ export default function renderData(data) {
 
 function renderArray(data) {
   return data.map((value, index) => {
-    return (<Node key={ index } name={ index } data={ value } />);
+    return (<Node key={ index } name={ index } value={ value } />);
   });
 }
 
 function renderObject(data) {
   return Object.keys(data).map((keyName, index) => {
-    return (<Node key={ index } name={ keyName } data={ data[keyName] } />);
+    return (<Node key={ index } name={ keyName } value={ data[keyName] } />);
   });
+}
+
+function renderFunction(data) {
+  const { prototype } = data;
+
+  return (
+    <React.Fragment>
+      <Node name="length" value={ data.length } />
+      <Node name="name" value={ data.name || null } />
+      <Node name="prototype" value={ prototype.constructor }>
+        <List>
+          <Node name="length" value={ prototype.constructor.length } />
+          <Node name="name" value={ prototype.constructor.name } />
+        </List>
+      </Node>
+    </React.Fragment>
+  );
 }

@@ -8,6 +8,7 @@ padding: 1rem;
 background-color: #243239;
 border-radius: 3px;
 color: #AFCCD5;
+line-height: 1.4;
 `;
 
 export default Panel;

@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import List from './List';
 import renderData from '../renderData';
+import getValueExcerpt from '../getValueExcerpt';
 
 const NodeContainer = styled.li`
 position: relative;
 padding-left: .9rem;
 
-cursor: pointer;
 list-style: none;
 
 &:not(:last-child) {
@@ -38,23 +39,19 @@ ${({ isExpanded}) => isExpanded && `
 
 const NodeName = styled.span`
 color: #7AD9ED;
+cursor: pointer;
 `;
 
 const NodeValue = styled.span`
-color: #FF8B6E;
+color: ${({ isBlue }) => isBlue ? '#79ABFA' : '#FF8B6E'};
 `;
 
-const getValueExcerpt = (data) => {
-  if (typeof data === 'string') return `"${data}"`;
-  if (typeof data === 'boolean') return `${data}`;
-  if (Array.isArray(data)) return `Array[${data.length}]`;
-  if (data instanceof Object) return '{…}';
-  if (!isNaN(data)) return data;
-
-  return 'null';
-}
-
 export default class Node extends React.PureComponent {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired
+  }
+
   state = {
     isExpanded: false
   }
@@ -64,19 +61,25 @@ export default class Node extends React.PureComponent {
     this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
   }
 
+  renderChildren = () => {
+    const { children, value } = this.props;
+    if (children) return children;
+
+    return renderData(value);
+  }
+
   render() {
     const { isExpanded } = this.state;
-    const { name, data } = this.props;
-    const isExpandable = (Array.isArray(data)) || (data instanceof Object);
+    const { children, name, value } = this.props;
+    const isExpandable = (Array.isArray(value)) || (value instanceof Object);
+    const hasBlueValue = Array.isArray(value) || (typeof value === 'function');
 
     return (
-      <NodeContainer onClick={ this.handleClick }>
+      <NodeContainer>
         { isExpandable && (<NodeArrow isExpanded={ isExpanded } />) }
-        <NodeName>{ name }: </NodeName>
-        <NodeValue>{ getValueExcerpt(data) }</NodeValue>
-        { isExpanded && (
-          <List>{ renderData(data) }</List>
-        ) }
+        <NodeName onClick={ this.handleClick }>{ name }: </NodeName>
+        <NodeValue isBlue={ hasBlueValue }>{ getValueExcerpt(value) }</NodeValue>
+        { isExpanded && this.renderChildren() }
       </NodeContainer>
     );
   }

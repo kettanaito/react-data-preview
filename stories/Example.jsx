@@ -5,16 +5,20 @@ const data = {
   firstName: 'John',
   lastName: 'Maverick',
   newsletter: false,
+  setState(a, b, c) {},
+  unknownFunc: () => { return false; },
   orders: [
     {
       id: 1,
       price: 1230,
-      status: 'NEW'
+      status: 'NEW',
+      reorder: function() {}
     },
     {
       id: 2,
       price: 3400,
-      status: 'CLOSED'
+      status: 'CLOSED',
+      reorder: function() {}
     }
   ],
   userInfo: {
