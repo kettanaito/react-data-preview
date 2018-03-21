@@ -1,0 +1,44 @@
+{
+  "name": "react-data-preview",
+  "version": "1.0.0",
+  "description": "Fancy preview for JavaScript data.",
+  "main": "lib/index",
+  "scripts": {
+    "test": "test",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kettanaito/react-data-preview.git"
+  },
+  "keywords": [
+    "javascript",
+    "data",
+    "preview",
+    "react"
+  ],
+  "author": "Artem Zakharchenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kettanaito/react-data-preview/issues"
+  },
+  "homepage": "https://github.com/kettanaito/react-data-preview#readme",
+  "dependencies": {
+    "react": "^16.2.0",
+    "styled-components": "^3.2.3"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.3.15",
+    "@storybook/addon-links": "^3.3.15",
+    "@storybook/react": "^3.3.15",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "prop-types": "^15.6.1",
+    "react-dom": "^16.2.0",
+    "storybook": "^1.0.0"
+  }
+}

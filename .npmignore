@@ -1,0 +1,5 @@
+.storybook
+src
+docs
+stories
+webpack.*
