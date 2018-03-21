@@ -1,16 +1,14 @@
 import React from 'react';
 import Preview from '../src';
 
-class Pooper {}
+class UserImage {}
 
 const data = {
   firstName: 'John',
   lastName: 'Maverick',
-  someClass: Pooper,
-  newsletter: false,
-  setState(a, b, c) {},
-  unknownFunc: () => { return false; },
-  emptyArray: [],
+  isAuthenticated: true,
+  image: UserImage,
+  logout() {},
   orders: [
     {
       id: 1,
@@ -25,7 +23,7 @@ const data = {
       reorder: function() {}
     }
   ],
-  userInfo: {
+  settings: {
     isBusiness: false
   }
 };
