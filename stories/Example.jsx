@@ -1,12 +1,16 @@
 import React from 'react';
 import Preview from '../src';
 
+class Pooper {}
+
 const data = {
   firstName: 'John',
   lastName: 'Maverick',
+  someClass: Pooper,
   newsletter: false,
   setState(a, b, c) {},
   unknownFunc: () => { return false; },
+  emptyArray: [],
   orders: [
     {
       id: 1,

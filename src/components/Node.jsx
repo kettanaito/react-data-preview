@@ -18,7 +18,7 @@ list-style: none;
 
 const NodeArrow = styled.span`
 position: absolute;
-top: 4px;
+top: 6px;
 left: 3px;
 display: inline-block;
 margin: auto .3rem auto 0;
@@ -26,7 +26,7 @@ height: 0;
 
 border-style: solid;
 border-width: 5px;
-border-color: rgba(255, 255, 255, .2) transparent transparent;
+border-color: ${({ theme }) => theme.node.arrowBackground} transparent transparent;
 
 transform: rotate(${({ isExpanded }) => isExpanded ? 0 : -90}deg);
 transform-origin: center;
@@ -38,17 +38,14 @@ ${({ isExpanded}) => isExpanded && `
 `;
 
 const NodeName = styled.span`
-color: #7AD9ED;
+background-color: ${({ theme }) => theme.node.name.background};
+color: ${({ theme }) => theme.node.name.foreground};
 cursor: pointer;
-`;
-
-const NodeValue = styled.span`
-color: ${({ isBlue }) => isBlue ? '#79ABFA' : '#FF8B6E'};
 `;
 
 export default class Node extends React.PureComponent {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     value: PropTypes.any.isRequired
   }
 
@@ -65,7 +62,11 @@ export default class Node extends React.PureComponent {
     const { children, value } = this.props;
     if (children) return children;
 
-    return renderData(value);
+    return (
+      <List>
+        { renderData(value) }
+      </List>
+    );
   }
 
   render() {
@@ -78,7 +79,7 @@ export default class Node extends React.PureComponent {
       <NodeContainer>
         { isExpandable && (<NodeArrow isExpanded={ isExpanded } />) }
         <NodeName onClick={ this.handleClick }>{ name }: </NodeName>
-        <NodeValue isBlue={ hasBlueValue }>{ getValueExcerpt(value) }</NodeValue>
+        { getValueExcerpt(value) }
         { isExpanded && this.renderChildren() }
       </NodeContainer>
     );

@@ -16,14 +16,28 @@ export default function renderData(data) {
 }
 
 function renderArray(data) {
+  if (data.length === 0) {
+    return (<div><i>Empty array</i></div>);
+  }
+
   return data.map((value, index) => {
-    return (<Node key={ index } name={ index } value={ value } />);
+    return (
+      <Node
+        key={ index }
+        name={ index }
+        value={ value } />
+      );
   });
 }
 
 function renderObject(data) {
   return Object.keys(data).map((keyName, index) => {
-    return (<Node key={ index } name={ keyName } value={ data[keyName] } />);
+    return (
+      <Node
+        key={ index }
+        name={ keyName }
+        value={ data[keyName] } />
+      );
   });
 }
 

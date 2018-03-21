@@ -5,9 +5,9 @@ const Panel = styled.ul`
 margin: 1rem;
 padding: 1rem;
 
-background-color: #243239;
+background-color: ${({ theme }) => theme.panel.background};
 border-radius: 3px;
-color: #AFCCD5;
+color: ${({ theme }) => theme.panel.foreground};
 line-height: 1.4;
 `;
 
