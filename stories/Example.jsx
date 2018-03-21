@@ -33,7 +33,10 @@ const data = {
 export default class Example extends React.Component {
   render() {
     return (
-      <Preview data={ data } />
+      <div>
+        <Preview data={ data } />
+        <Preview data={ data } theme="light" />
+      </div>
     );
   }
 }

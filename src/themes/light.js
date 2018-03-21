@@ -1,7 +1,8 @@
 export default {
   panel: {
     foreground: '#888',
-    background: '#f9f9f9'
+    background: '#f9f9f9',
+    borderColor: '#ddd',
   },
   primitives: {
     string: {
